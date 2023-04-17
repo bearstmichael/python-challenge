@@ -1,6 +1,8 @@
 import os
 import csv
 
+report = open('analysis/election_data_analysis.txt','w')
+
 path = 'Resources/election_data.csv' # Path to collect data from the Resources folder
 csv_file = open(path) #go down that path
 csv_reader = csv.reader(csv_file) #read the csv dataset there, turning it into an array (well, list techincally) that we can read here
@@ -27,6 +29,11 @@ print("~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(f"Total Votes: {vote_counter}")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~")
 
+report.write("Election Results\n")
+report.write("~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+report.write(f"Total Votes: {vote_counter}\n")
+report.write("~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+
 #this block prints out the candidates and the vote results
 for i in range(len(candidates)): #we're going to iterate through our dataset, looking at one candidate at a time.
     candidate_votes = 0 #initial count of votes for that candidate
@@ -41,7 +48,14 @@ for i in range(len(candidates)): #we're going to iterate through our dataset, lo
     
     percentage = round(100*int(total_votes_per_can[i])/vote_counter,3) #calc percentage of the total votes that that person got
     print(f"{candidates[i]}: {percentage}% ({total_votes_per_can[i]})")
+    report.write(f"{candidates[i]}: {percentage}% ({total_votes_per_can[i]})\n")
 
 print("~~~~~~~~~~~~~~~~~~~~~~~~~")
 print(f"Winner: {winner}")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+report.write("~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+report.write(f"Winner: {winner}\n")
+report.write("~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+report.close()

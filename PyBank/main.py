@@ -45,12 +45,6 @@ for change in changes: #for each of the values of a the list of successive diffe
 
 average = round(running_changes_total/(month_count-1),2) #the average is that running total divided by the number of months (less one, b/c 86 months only have 85 changes from one month to the next)
 
-print("Financial Analysis")
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-print(f"Total Months: {month_count}")
-print(f"Total: ${running_total}")
-print(f"Average Change: ${average}")
-
 greatest_month=""
 least_month=""
 
@@ -62,5 +56,22 @@ for row in csv_reader2: #for every row in our dataset (the copied one, b/c we al
         least_month = str(row[0])
     new_row_idx +=1 #add one to the row ticker
 
+#open a new report, print it, and close the report
+report = open('analysis/budget_data_analysis.txt','w')
+report.write("Financial Analysis\n")
+report.write("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n")
+report.write(f"Total Months: {month_count}\n")
+report.write(f"Total: ${running_total}\n")
+report.write(f"Average Change: ${average}\n")
+report.write(f"Greatest Increase: {greatest_month} (${greatest_increase})\n")
+report.write(f"Greatest Decrease: {least_month} (${greatest_decrease})")
+report.close()
+
+#print everything to terminal as well
+print("Financial Analysis")
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print(f"Total Months: {month_count}")
+print(f"Total: ${running_total}")
+print(f"Average Change: ${average}")
 print(f"Greatest Increase: {greatest_month} (${greatest_increase})")
 print(f"Greatest Decrease: {least_month} (${greatest_decrease})")
